@@ -50,7 +50,9 @@ class UploadBehavior extends Behavior
 
         $schema = $this->_table->getSchema();
         foreach (array_keys($this->getConfig()) as $field) {
-            $schema->setColumnType($field, 'upload.file');
+            if(is_string($field)){
+                $schema->setColumnType($field, 'upload.file');
+            }
         }
         $this->_table->setSchema($schema);
     }

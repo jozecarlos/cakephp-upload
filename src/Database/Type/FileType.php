@@ -5,36 +5,37 @@ namespace Josegonzalez\Upload\Database\Type;
 
 use Cake\Database\DriverInterface;
 use Cake\Database\Type\BaseType;
+use PDO;
 
 class FileType extends BaseType
 {
-    /**
-     * Marshalls flat data into PHP objects.
-     *
-     * Most useful for converting request data into PHP objects
-     * that make sense for the rest of the ORM/Database layers.
-     *
-     * @param mixed $value The value to convert.
-     * @return mixed Converted value.
-     */
-    public function marshal($value)
+    public function toPHP($value, DriverInterface $driver)
     {
+        if ($value === null) {
+            return null;
+        }
         return $value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
+    public function marshal($value)
+    {
+        if (is_array($value) || $value === null) {
+            return $value;
+        }
+        return null;
+    }
+
     public function toDatabase($value, DriverInterface $driver)
     {
         return $value;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function toPHP($value, DriverInterface $driver)
+
+    public function toStatement($value, DriverInterface $driver)
     {
-        return $value;
+        if ($value === null) {
+            return PDO::PARAM_NULL;
+        }
+        return PDO::PARAM_STR;
     }
 }

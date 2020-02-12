@@ -14,13 +14,18 @@ use Josegonzalez\Upload\Database\Type\FileType;
 class Plugin extends BasePlugin
 {
     /**
-     * Plugin bootstrap.
+     * Load all the plugin configuration and bootstrap logic.
      *
-     * @param \Cake\Core\PluginApplicationInterface $app Application instance.
+     * The host application is provided as an argument. This allows you to load
+     * additional plugin dependencies, or attach events.
+     *
+     * @param \Cake\Core\PluginApplicationInterface $app The host application
      * @return void
      */
     public function bootstrap(PluginApplicationInterface $app): void
     {
         TypeFactory::map('upload.file', FileType::class);
+        parent::bootstrap($app);
     }
+
 }
