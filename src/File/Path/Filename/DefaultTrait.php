@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace Josegonzalez\Upload\File\Path\Filename;
 
 use Cake\Utility\Hash;
@@ -12,7 +14,7 @@ trait DefaultTrait
      *
      * @return string
      */
-    public function filename()
+    public function filename(): string
     {
         $processor = Hash::get($this->settings, 'nameCallback', null);
         if (is_callable($processor)) {

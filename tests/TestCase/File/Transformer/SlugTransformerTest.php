@@ -1,15 +1,14 @@
 <?php
+declare(strict_types=1);
+
 namespace Josegonzalez\Upload\Test\TestCase\File\Transformer;
 
-use Cake\ORM\Entity;
-use Cake\ORM\Table;
 use Cake\TestSuite\TestCase;
 use Josegonzalez\Upload\File\Transformer\SlugTransformer;
-use Josegonzalez\Upload\File\Transformer\TransformerInterface;
 
 class SlugTransformerTest extends TestCase
 {
-    public function setup()
+    public function setUp(): void
     {
         $entity = $this->getMockBuilder('Cake\ORM\Entity')->getMock();
         $table = $this->getMockBuilder('Cake\ORM\Table')->getMock();
@@ -17,11 +16,6 @@ class SlugTransformerTest extends TestCase
         $field = 'field';
         $settings = [];
         $this->transformer = new SlugTransformer($table, $entity, $data, $field, $settings);
-    }
-
-    public function teardown()
-    {
-        unset($this->transformer);
     }
 
     public function testTransform()

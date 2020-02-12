@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Josegonzalez\Upload\Test\TestCase\Validation;
 
@@ -9,20 +10,15 @@ class UploadValidationTest extends TestCase
 {
     private $data;
 
-    public function setup()
+    public function setUp(): void
     {
         parent::setUp();
         $this->data = [
             'name' => 'sample.txt',
             'type' => 'text/plain',
             'tmp_name' => '/tmp/tmpfile',
-            'size' => 200
+            'size' => 200,
         ];
-    }
-
-    public function teardown()
-    {
-        parent::tearDown();
     }
 
     public function testIsUnderPhpSizeLimit()

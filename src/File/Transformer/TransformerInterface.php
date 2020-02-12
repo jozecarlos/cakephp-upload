@@ -1,7 +1,9 @@
 <?php
+declare(strict_types=1);
+
 namespace Josegonzalez\Upload\File\Transformer;
 
-use Cake\ORM\Entity;
+use Cake\Datasource\EntityInterface;
 use Cake\ORM\Table;
 
 interface TransformerInterface
@@ -10,12 +12,12 @@ interface TransformerInterface
      * Constructor.
      *
      * @param \Cake\ORM\Table  $table the instance managing the entity
-     * @param \Cake\ORM\Entity $entity the entity to construct a path for.
+     * @param \Cake\Datasource\EntityInterface $entity the entity to construct a path for.
      * @param array            $data the data being submitted for a save
      * @param string           $field the field for which data will be saved
      * @param array            $settings the settings for the current field
      */
-    public function __construct(Table $table, Entity $entity, $data, $field, $settings);
+    public function __construct(Table $table, EntityInterface $entity, array $data, string $field, array $settings);
 
     /**
      * Creates a set of files from the initial data and returns them as key/value
@@ -29,5 +31,5 @@ interface TransformerInterface
      *
      * @return array key/value pairs of temp files mapping to their names
      */
-    public function transform();
+    public function transform(): array;
 }
